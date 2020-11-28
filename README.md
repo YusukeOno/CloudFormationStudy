@@ -15,7 +15,6 @@ aws cloudformation create-stack --stack-name practice-20201128 --template-body f
 aws cloudformation delete-stack --stack-name practice-20201128
 ```
 
-
 ## Recommended Plugin
 
 ### Visual Studio Code Extention
