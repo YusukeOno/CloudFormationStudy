@@ -144,7 +144,7 @@ Resources:
         - IpProtocol: tcp
           FromPort: 22
           ToPort: 22
-          CidrIp: 60.69.204.19/32
+          CidrIp: 0.0.0.0/0
 
   ## EC2インスタンスの作成
   EC2Instance:
