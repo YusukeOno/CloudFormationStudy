@@ -32,8 +32,9 @@ Resources:
     Type: "AWS::EC2::Subnet"
     Properties:
       VpcId: !Ref VPC
+      # https://qiita.com/ksato2032/items/98b76d4ccaa1a5641fc8
       AvailabilityZone: !Select
-        - 0
+        - 1
         - Fn::GetAZs: !Ref "AWS::Region"
       CidrBlock: 10.0.2.0/24
       MapPublicIpOnLaunch: true
@@ -59,8 +60,9 @@ Resources:
     Type: "AWS::EC2::Subnet"
     Properties:
       VpcId: !Ref VPC
+      # https://zenn.dev/hassaku63/articles/11f005e42c701bf3b37f
       AvailabilityZone: !Select
-        - 0
+        - 1
         - Fn::GetAZs: !Ref "AWS::Region"
       CidrBlock: 10.0.4.0/24
       MapPublicIpOnLaunch: false
