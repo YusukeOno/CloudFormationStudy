@@ -1,0 +1,163 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Create AWS CloudFormation Customize Virtual Private Cloud
+
+Resources:
+  ## VPCの作成をする
+  VPC:
+    Type: "AWS::EC2::VPC"
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: example-vpc
+
+  ## MultiAZに配置するための複数のPublicサブネット(SubnetPublic1aとSubnetPublic１d)の作成
+  SubnetPublic1a:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: ap-northeast-1a
+      CidrBlock: 10.0.1.0/24
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: example-vpc-public-subnet-1a
+
+  SubnetPublic1d:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: ap-northeast-1d
+      CidrBlock: 10.0.2.0/24
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: example-vpc-public-subnet-1d
+
+  ## MultiAZに配置するための複数のPrivateサブネット(SubnetPrivate1aとSubnetPrivate１d)の作成
+  SubnetPrivate1a:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: ap-northeast-1a
+      CidrBlock: 10.0.3.0/24
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: example-vpc-private-subnet-1a
+
+  SubnetPrivate1d:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: ap-northeast-1d
+      CidrBlock: 10.0.4.0/24
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: example-vpc-private-subnet-1d
+
+  ## InternetGatewayの作成
+  InternetGateway:
+    Type: "AWS::EC2::InternetGateway"
+    Properties:
+      Tags:
+        - Key: Name
+          Value: example-vpc-igwg
+
+  ## VPC にゲートウェイをアタッチします。
+  GatewayToInternet:
+    Type: "AWS::EC2::VPCGatewayAttachment"
+    Properties:
+      VpcId: !Ref VPC
+      InternetGatewayId: !Ref InternetGateway
+
+  ## VPC内に新しいルートテーブルの作成
+  PublicRouteTable:
+    Type: "AWS::EC2::RouteTable"
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Application
+          Value: !Ref "AWS::StackId"
+        - Key: Network
+          Value: Public
+
+  PublicRoute:
+    Type: "AWS::EC2::Route"
+    DependsOn: GatewayToInternet
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+
+  ## サブネットをルートテーブルに関連付ける
+  PublicSubnetRouteTableAssociatio1a:
+    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Properties:
+      SubnetId: !Ref SubnetPublic1a
+      RouteTableId: !Ref PublicRouteTable
+
+  PublicSubnetRouteTableAssociation1c:
+    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Properties:
+      SubnetId: !Ref SubnetPublic1d
+      RouteTableId: !Ref PublicRouteTable
+
+  ## Vpcに新しいネットワークACLの作成
+  PublicNetworkAcl:
+    Type: "AWS::EC2::NetworkAcl"
+    Properties:
+      VpcId: !Ref VPC
+
+  PublicNetworkAclEntry:
+    Type: "AWS::EC2::NetworkAclEntry"
+    Properties:
+      CidrBlock: 0.0.0.0/0
+      Egress: false
+      NetworkAclId: !Ref PublicNetworkAcl
+      Protocol: -1
+      RuleAction: allow
+      RuleNumber: 100
+
+  PublicSubnetNetworkAclAssociatio1a:
+    Type: "AWS::EC2::SubnetNetworkAclAssociation"
+    Properties:
+      SubnetId: !Ref SubnetPublic1a
+      NetworkAclId: !Ref PublicNetworkAcl
+
+  PublicSubnetNetworkAclAssociatio1d:
+    Type: "AWS::EC2::SubnetNetworkAclAssociation"
+    Properties:
+      SubnetId: !Ref SubnetPublic1d
+      NetworkAclId: !Ref PublicNetworkAcl
+
+  ## SecurityGroupの作成
+  InstanceSecurityGroup:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      VpcId: !Ref VPC
+      GroupDescription: Enable SSH access via port 22
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 60.69.204.19/32
+
+  ## EC2インスタンスの作成
+  EC2Instance:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      ImageId: ami-00f045aed21a55240
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref SubnetPublic1a
+      InstanceType: t3.micro
+      KeyName: 20200527-devepment
+      Tags:
+        - Key: Name
+          Value: demo
+        - Key: InstanceName
+          Value: amzn2-ami-hvm-2.0.20201126.0-x86_64-gp2
