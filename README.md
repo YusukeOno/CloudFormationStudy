@@ -95,3 +95,7 @@ https://qiita.com/y-ohgi/items/89f07e866713185799f5
 [AWSマイスターシリーズ] AWS CloudFormation
 
 https://www.slideshare.net/AmazonWebServicesJapan/aws-aws-cloudformation
+
+AWS CloudFormation ベストプラクティス
+
+https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/best-practices.html
