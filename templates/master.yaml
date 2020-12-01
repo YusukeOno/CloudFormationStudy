@@ -108,13 +108,13 @@ Resources:
   PublicSubnetRouteTableAssociatio1a:
     Type: "AWS::EC2::SubnetRouteTableAssociation"
     Properties:
-      SubnetId: !Ref SubnetPublic1a
+      SubnetId: !Ref SubnetPublic1
       RouteTableId: !Ref PublicRouteTable
 
   PublicSubnetRouteTableAssociation1c:
     Type: "AWS::EC2::SubnetRouteTableAssociation"
     Properties:
-      SubnetId: !Ref SubnetPublic1d
+      SubnetId: !Ref SubnetPublic2
       RouteTableId: !Ref PublicRouteTable
 
   ## Vpcに新しいネットワークACLの作成
@@ -146,13 +146,13 @@ Resources:
   PublicSubnetNetworkAclAssociatio1a:
     Type: "AWS::EC2::SubnetNetworkAclAssociation"
     Properties:
-      SubnetId: !Ref SubnetPublic1a
+      SubnetId: !Ref SubnetPublic1
       NetworkAclId: !Ref PublicNetworkAcl
 
   PublicSubnetNetworkAclAssociatio1d:
     Type: "AWS::EC2::SubnetNetworkAclAssociation"
     Properties:
-      SubnetId: !Ref SubnetPublic1d
+      SubnetId: !Ref SubnetPublic2
       NetworkAclId: !Ref PublicNetworkAcl
 
   ## SecurityGroupの作成
@@ -168,13 +168,28 @@ Resources:
           CidrIp: 0.0.0.0/0
 
   ## EC2インスタンスの作成
-  EC2Instance:
+  EC2Instance1:
     Type: "AWS::EC2::Instance"
     Properties:
       ImageId: ami-00f045aed21a55240
       SecurityGroupIds:
         - !Ref InstanceSecurityGroup
-      SubnetId: !Ref SubnetPublic1a
+      SubnetId: !Ref SubnetPublic1
+      InstanceType: t3.micro
+      KeyName: 20200527-devepment
+      Tags:
+        - Key: Name
+          Value: demo
+        - Key: InstanceName
+          Value: amzn2-ami-hvm-2.0.20201126.0-x86_64-gp2
+
+  EC2Instance2:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      ImageId: ami-00f045aed21a55240
+      SecurityGroupIds:
+        - !Ref InstanceSecurityGroup
+      SubnetId: !Ref SubnetPublic2
       InstanceType: t3.micro
       KeyName: 20200527-devepment
       Tags:
