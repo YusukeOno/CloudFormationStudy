@@ -69,6 +69,9 @@ aws cloudformation delete-stack --stack-name practice-20201128
 
 ### Visual Studio Code Extention
 
+* [CloudFormation support for Visual Studio Code](https://github.com/aws-scripting-guy/cform-VSCode)
+  * スケルトン作成：YAMLファイルを作成後に ```start``` とタイプする。
+
 * [AWS CloudFormation Linter](https://github.com/aws-cloudformation/cfn-python-lint)
 
 * [Sort lines](https://github.com/Tyriar/vscode-sort-lines)
