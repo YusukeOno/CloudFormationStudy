@@ -211,6 +211,11 @@ Resources:
           Value: demo
         - Key: InstanceName
           Value: amzn2-ami-hvm-2.0.20201126.0-x86_64-gp2
+      UserData: !Base64
+        Fn::Sub: |
+          !#/bin/bash -xe
+          yum install -y aws-cfn-bootstrap
+          /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource EC2Instance1 --region ${AWS::Region}
 
   EC2Instance2:
     Type: "AWS::EC2::Instance"
@@ -247,3 +252,17 @@ Resources:
           Value: demo
         - Key: InstanceName
           Value: amzn2-ami-hvm-2.0.20201126.0-x86_64-gp2
+      UserData: !Base64
+        Fn::Sub: |
+          !#/bin/bash -xe
+          yum install -y aws-cfn-bootstrap
+          /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource EC2Instance2 --region ${AWS::Region}
+
+  EC2Instance1EIP:
+    Type: "AWS::EC2::EIP"
+    Properties:
+      InstanceId: !Ref EC2Instance1
+  EC2Instance2EIP:
+    Type: "AWS::EC2::EIP"
+    Properties:
+      InstanceId: !Ref EC2Instance2
