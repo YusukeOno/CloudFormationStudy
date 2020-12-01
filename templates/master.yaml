@@ -1,6 +1,7 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: Create AWS CloudFormation Customize Virtual Private Cloud
 
+# https://qiita.com/rammesh/items/22bab12455b18eda7e49#vpc%E4%BD%9C%E6%88%90public%E5%8F%8A%E3%81%B3private%E3%82%B5%E3%83%96%E3%83%8D%E3%83%83%E3%83%88
 Resources:
   ## VPCの作成をする
   VPC:
@@ -112,11 +113,21 @@ Resources:
     Properties:
       VpcId: !Ref VPC
 
-  PublicNetworkAclEntry:
+  PublicNetworkInboudAclEntry:
     Type: "AWS::EC2::NetworkAclEntry"
     Properties:
       CidrBlock: 0.0.0.0/0
       Egress: false
+      NetworkAclId: !Ref PublicNetworkAcl
+      Protocol: -1
+      RuleAction: allow
+      RuleNumber: 100
+
+  PublicNetworkOutboudAclEntry:
+    Type: "AWS::EC2::NetworkAclEntry"
+    Properties:
+      CidrBlock: 0.0.0.0/0
+      Egress: true
       NetworkAclId: !Ref PublicNetworkAcl
       Protocol: -1
       RuleAction: allow
