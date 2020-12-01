@@ -170,6 +170,27 @@ Resources:
   ## EC2インスタンスの作成
   EC2Instance1:
     Type: "AWS::EC2::Instance"
+    Metadata:
+      # https://www.royozaki.net/archives/909
+      AWS::CloudFormation::Init:
+        config:
+          packages:
+            yum:
+              httpd: []
+              php: []
+            files:
+              /var/www/html/phpinfo.php:
+                content: |
+                  <?php
+                    phpinfo();
+                  ?>
+                mode: "000644"
+                owner: apache
+                group: apache
+            services:
+              sysvinit:
+                enabled: true
+                ensureRunning: true
     Properties:
       ImageId: ami-00f045aed21a55240
       SecurityGroupIds:
@@ -185,6 +206,27 @@ Resources:
 
   EC2Instance2:
     Type: "AWS::EC2::Instance"
+    Metadata:
+      # https://www.royozaki.net/archives/909
+      AWS::CloudFormation::Init:
+        config:
+          packages:
+            yum:
+              httpd: []
+              php: []
+            files:
+              /var/www/html/phpinfo.php:
+                content: |
+                  <?php
+                    phpinfo();
+                  ?>
+                mode: "000644"
+                owner: apache
+                group: apache
+            services:
+              sysvinit:
+                enabled: true
+                ensureRunning: true
     Properties:
       ImageId: ami-00f045aed21a55240
       SecurityGroupIds:
