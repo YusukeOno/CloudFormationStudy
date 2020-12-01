@@ -14,8 +14,8 @@ Resources:
         - Key: Name
           Value: example-vpc
 
-  ## MultiAZに配置するための複数のPublicサブネット(SubnetPublic1aとSubnetPublic１d)の作成
-  SubnetPublic1a:
+  ## MultiAZに配置するための複数のPublicサブネット(SubnetPublic1とSubnetPublic2)の作成
+  SubnetPublic1:
     Type: "AWS::EC2::Subnet"
     Properties:
       VpcId: !Ref VPC
@@ -28,7 +28,7 @@ Resources:
         - Key: Name
           Value: example-vpc-public-subnet-1a
 
-  SubnetPublic1d:
+  SubnetPublic2:
     Type: "AWS::EC2::Subnet"
     Properties:
       VpcId: !Ref VPC
@@ -42,8 +42,8 @@ Resources:
         - Key: Name
           Value: example-vpc-public-subnet-1d
 
-  ## MultiAZに配置するための複数のPrivateサブネット(SubnetPrivate1aとSubnetPrivate１d)の作成
-  SubnetPrivate1a:
+  ## MultiAZに配置するための複数のPrivateサブネット(SubnetPrivate1とSubnetPrivate2)の作成
+  SubnetPrivate1:
     Type: "AWS::EC2::Subnet"
     Properties:
       VpcId: !Ref VPC
@@ -56,7 +56,7 @@ Resources:
         - Key: Name
           Value: example-vpc-private-subnet-1a
 
-  SubnetPrivate1d:
+  SubnetPrivate2:
     Type: "AWS::EC2::Subnet"
     Properties:
       VpcId: !Ref VPC
