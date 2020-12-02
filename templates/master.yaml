@@ -172,7 +172,7 @@ Resources:
           ToPort: 443
           CidrIp: "0.0.0.0/0"
   ### for EC2
-  InstanceSecurityGroup:
+  SecurityGroupEC2:
     Type: "AWS::EC2::SecurityGroup"
     Properties:
       VpcId: !Ref VPC
@@ -260,7 +260,7 @@ Resources:
     Properties:
       ImageId: ami-00f045aed21a55240
       SecurityGroupIds:
-        - !Ref InstanceSecurityGroup
+        - !Ref SecurityGroupEC2
       SubnetId: !Ref SubnetPublic1
       InstanceType: t3.micro
       KeyName: 20200527-devepment
@@ -306,7 +306,7 @@ Resources:
     Properties:
       ImageId: ami-00f045aed21a55240
       SecurityGroupIds:
-        - !Ref InstanceSecurityGroup
+        - !Ref SecurityGroupEC2
       SubnetId: !Ref SubnetPublic2
       InstanceType: t3.micro
       KeyName: 20200527-devepment
