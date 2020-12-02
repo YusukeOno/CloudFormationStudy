@@ -208,11 +208,15 @@ Resources:
           Value: demo
         - Key: InstanceName
           Value: amzn2-ami-hvm-2.0.20201126.0-x86_64-gp2
-      UserData: !Base64
-        Fn::Sub: |
-          !#/bin/bash -xe
-          yum install -y aws-cfn-bootstrap
-          /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource EC2Instance1 --region ${AWS::Region}
+      # https://qiita.com/blackpeach7/items/6cc67e19add848811a2d
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash -xe
+          yum update -y
+          yum install -y httpd
+          systemctl start httpd
+          systemctl enable httpd
+          echo "Hello World from user data" > /var/www/html/index.html
 
   EC2Instance2:
     Type: "AWS::EC2::Instance"
@@ -250,11 +254,15 @@ Resources:
           Value: demo
         - Key: InstanceName
           Value: amzn2-ami-hvm-2.0.20201126.0-x86_64-gp2
-      UserData: !Base64
-        Fn::Sub: |
-          !#/bin/bash -xe
-          yum install -y aws-cfn-bootstrap
-          /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource EC2Instance2 --region ${AWS::Region}
+      # https://qiita.com/blackpeach7/items/6cc67e19add848811a2d
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash -xe
+          yum update -y
+          yum install -y httpd
+          systemctl start httpd
+          systemctl enable httpd
+          echo "Hello World from user data" > /var/www/html/index.html
 
   EC2Instance1EIP:
     Type: "AWS::EC2::EIP"
