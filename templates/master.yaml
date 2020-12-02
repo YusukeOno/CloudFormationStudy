@@ -187,25 +187,68 @@ Resources:
           ToPort: 80
           CidrIp: 0.0.0.0/0
 
-  ## Internet ELB
+  ## Internet ELB (Classic)
+  # InternetELB:
+  #   Type: "AWS::ElasticLoadBalancing::LoadBalancer"
+  #   Properties:
+  #     ConnectionDrainingPolicy:
+  #       Enabled: true
+  #       Timeout: 300
+  #     Listeners:
+  #       - LoadBalancerPort: "80"
+  #         InstancePort: "80"
+  #         Protocol: HTTP
+  #     Instances:
+  #       - !Ref EC2Instance1
+  #       - !Ref EC2Instance2
+  #     SecurityGroups:
+  #       - !Ref ELBSecurityGroup
+  #     Subnets:
+  #       - !Ref SubnetPublic1
+  #       - !Ref SubnetPublic2
+
+  ## Internet ELB (Application Load Balancer)
   InternetELB:
-    Type: "AWS::ElasticLoadBalancing::LoadBalancer"
+    Type: "AWS::ElasticLoadBalancingV2::LoadBalancer"
     Properties:
-      ConnectionDrainingPolicy:
-        Enabled: true
-        Timeout: 300
-      Listeners:
-        - LoadBalancerPort: "80"
-          InstancePort: "80"
-          Protocol: HTTP
-      Instances:
-        - !Ref EC2Instance1
-        - !Ref EC2Instance2
+      # Name: ""
+      IpAddressType: "ipv4"
       SecurityGroups:
         - !Ref ELBSecurityGroup
       Subnets:
         - !Ref SubnetPublic1
         - !Ref SubnetPublic2
+      Type: application
+
+  InternetELBTargetGroup:
+    Type: "AWS::ElasticLoadBalancingV2::TargetGroup"
+    Properties:
+      HealthCheckIntervalSeconds: 30
+      HealthCheckPath: /
+      HealthCheckPort: "80"
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 10
+      HealthyThresholdCount: 4
+      Matcher:
+        HttpCode: "200"
+      Name: MyTargerGroup
+      Port: 80
+      Protocol: HTTP
+      Targets:
+        - Id: !Ref EC2Instance1
+          Port: 80
+        - Id: !Ref EC2Instance2
+          Port: 80
+      UnhealthyThresholdCount: 3
+      VpcId: !Ref VPC
+
+  InternetELBListner:
+    Type: "AWS::ElasticLoadBalancingV2::Listener"
+    Properties:
+      LoadBalancerArn: !Ref InternetELB
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref InternetELBTargetGroup
 
   ## EC2インスタンスの作成
   EC2Instance1:
@@ -252,7 +295,7 @@ Resources:
           yum install -y httpd
           systemctl start httpd
           systemctl enable httpd
-          echo "Hello World from user data" > /var/www/html/index.html
+          echo "Hello World from user data1" > /var/www/html/index.html
 
   EC2Instance2:
     Type: "AWS::EC2::Instance"
@@ -298,7 +341,7 @@ Resources:
           yum install -y httpd
           systemctl start httpd
           systemctl enable httpd
-          echo "Hello World from user data" > /var/www/html/index.html
+          echo "Hello World from user data2" > /var/www/html/index.html
 
   EC2Instance1EIP:
     Type: "AWS::EC2::EIP"
