@@ -245,10 +245,12 @@ Resources:
   InternetELBListner:
     Type: "AWS::ElasticLoadBalancingV2::Listener"
     Properties:
-      LoadBalancerArn: !Ref InternetELB
       DefaultActions:
         - Type: forward
           TargetGroupArn: !Ref InternetELBTargetGroup
+      LoadBalancerArn: !Ref InternetELB
+      Port: 80
+      Protocol: HTTP
 
   ## EC2インスタンスの作成
   EC2Instance1:
