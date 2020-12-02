@@ -187,26 +187,6 @@ Resources:
           ToPort: 80
           CidrIp: 0.0.0.0/0
 
-  ## Internet ELB (Classic)
-  # InternetELB:
-  #   Type: "AWS::ElasticLoadBalancing::LoadBalancer"
-  #   Properties:
-  #     ConnectionDrainingPolicy:
-  #       Enabled: true
-  #       Timeout: 300
-  #     Listeners:
-  #       - LoadBalancerPort: "80"
-  #         InstancePort: "80"
-  #         Protocol: HTTP
-  #     Instances:
-  #       - !Ref EC2Instance1
-  #       - !Ref EC2Instance2
-  #     SecurityGroups:
-  #       - !Ref ELBSecurityGroup
-  #     Subnets:
-  #       - !Ref SubnetPublic1
-  #       - !Ref SubnetPublic2
-
   ## Internet ELB (Application Load Balancer)
   InternetELB:
     Type: "AWS::ElasticLoadBalancingV2::LoadBalancer"
