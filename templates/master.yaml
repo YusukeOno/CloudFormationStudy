@@ -375,7 +375,7 @@ Resources:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties:
       AssociatePublicIpAddress: true
-      ImageId: ami-0ee1410f0644c1cac #Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type
+      ImageId: ami-00f045aed21a55240 #amzn2-ami-hvm-2.0.20201126.0-x86_64-gp2
       InstanceMonitoring: false
       InstanceType: t3.micro
       KeyName: 20200527-devepment
