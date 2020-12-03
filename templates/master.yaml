@@ -359,15 +359,6 @@ Resources:
           systemctl enable httpd
           echo "Hello World from user data2" > /var/www/html/index.html
 
-  # EC2Instance1EIP:
-  #   Type: "AWS::EC2::EIP"
-  #   Properties:
-  #     InstanceId: !Ref EC2Instance1
-  # EC2Instance2EIP:
-  #   Type: "AWS::EC2::EIP"
-  #   Properties:
-  #     InstanceId: !Ref EC2Instance2
-
   # --------------------
   # Auto Scaling
   # --------------------
