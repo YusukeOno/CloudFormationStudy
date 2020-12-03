@@ -345,3 +345,12 @@ Resources:
     Type: "AWS::EC2::EIP"
     Properties:
       InstanceId: !Ref EC2Instance2
+
+  ## AutoScalling Settings
+  mySimpleConfig:
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Properties:
+      ImageId: ami-00f045aed21a55240
+      SecurityGroups:
+        - Ref: SecurityGroupEC2
+      InstanceType: t3.micro
