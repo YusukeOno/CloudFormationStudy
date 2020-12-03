@@ -222,7 +222,7 @@ Resources:
       UnhealthyThresholdCount: 3
       VpcId: !Ref VPC
 
-  InternetELBListner:
+  InternetELBListnerHttp:
     Type: "AWS::ElasticLoadBalancingV2::Listener"
     Properties:
       DefaultActions:
@@ -231,6 +231,18 @@ Resources:
       LoadBalancerArn: !Ref InternetELB
       Port: 80
       Protocol: HTTP
+
+  InternetELBListnerHTTPS:
+    Type: "AWS::ElasticLoadBalancingV2::Listener"
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref InternetELBTargetGroup
+      LoadBalancerArn: !Ref InternetELB
+      Port: 443
+      Protocol: HTTPS
+      Certificates:
+        - CertificateArn: "arn:aws:acm:ap-northeast-1:377262267246:certificate/b0a4e848-f816-4c71-bb0c-dc09fb88cf1d"
 
   ## EC2インスタンスの作成
   EC2Instance1:
