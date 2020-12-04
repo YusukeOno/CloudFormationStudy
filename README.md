@@ -82,6 +82,10 @@ aws cloudformation delete-stack --stack-name practice-20201128
 cfn-lint [path to YAML file]
 ```
 
+## Overview
+
+![TODO](https://github.com/YusukeOno/CloudFormationStudy/wiki/img/overview.png "Overview")
+
 ## Reference Link
 
 DefaultVPCをawscliで作成する
