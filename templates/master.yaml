@@ -242,7 +242,7 @@ Resources:
       UnhealthyThresholdCount: 3
       VpcId: !Ref VPC
 
-  InternetELBListnerHttp:
+  InternetELBListnerHTTP:
     Type: "AWS::ElasticLoadBalancingV2::Listener"
     Properties:
       DefaultActions:
