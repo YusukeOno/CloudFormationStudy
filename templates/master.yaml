@@ -1,6 +1,11 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: Create AWS CloudFormation Customize Virtual Private Cloud
 
+Parameters:
+  AmiId:
+    Type: "AWS::EC2::Image::Id"
+    Description: ami-id
+
 # https://qiita.com/rammesh/items/22bab12455b18eda7e49#vpc%E4%BD%9C%E6%88%90public%E5%8F%8A%E3%81%B3private%E3%82%B5%E3%83%96%E3%83%8D%E3%83%83%E3%83%88
 Resources:
   # --------------------
@@ -292,7 +297,7 @@ Resources:
                   enabled: true
                   ensureRunning: true
     Properties:
-      ImageId: ami-00f045aed21a55240
+      ImageId: !Ref AmiId
       SecurityGroupIds:
         - !Ref SecurityGroupEC2
       SubnetId: !Ref SubnetPublic1
@@ -338,7 +343,7 @@ Resources:
                   enabled: true
                   ensureRunning: true
     Properties:
-      ImageId: ami-00f045aed21a55240
+      ImageId: !Ref AmiId
       SecurityGroupIds:
         - !Ref SecurityGroupEC2
       SubnetId: !Ref SubnetPublic2
@@ -366,7 +371,7 @@ Resources:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties:
       AssociatePublicIpAddress: true
-      ImageId: ami-00f045aed21a55240 #amzn2-ami-hvm-2.0.20201126.0-x86_64-gp2
+      ImageId: !Ref AmiId #amzn2-ami-hvm-2.0.20201126.0-x86_64-gp2
       InstanceMonitoring: false
       InstanceType: t3.micro
       KeyName: 20200527-devepment
