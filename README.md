@@ -53,10 +53,22 @@ Studying is fun for me. CloudFormation.
 
 ## Note
 
+### Check Stack
+
+```
+aws cloudformation validate-template --template-body file://[YAML_FILE_PATH]
+```
+
 ### Create Stack 
 
 ```
-aws cloudformation create-stack --stack-name [STACK_NAME] --template-body file://[YAML_FILE_PATH]
+aws cloudformation create-stack --template-body file://[YAML_FILE_PATH] --stack-name [STACK_NAME]
+```
+
+### Create Stack (Parameter Stack)
+
+```
+aws cloudformation create-stack --template-body file://[YAML_FILE_PATH] --parameters file://[JSON_FILE_PATH] --stack-name [STACK_NAME]
 ```
 
 ### Delete Stack
