@@ -79,7 +79,7 @@ aws cloudformation delete-stack --stack-name [STACK_NAME]
 #### cli Linter
 
 ```
-cfn-lint [path to YAML file]
+cfn-lint [YAML_FILE_PATH]
 ```
 
 ## Overview
