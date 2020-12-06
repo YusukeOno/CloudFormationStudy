@@ -23,7 +23,7 @@ Studying is fun for me. CloudFormation.
 * スタック単位でリソースの管理が可能。スタック破棄を実行すると、スタックに紐作りソースを破棄することが可能
 * 使用するリソースおよびリソースの構築順は、テンプレートの依存関係で決定
 
-### What's Template
+### What's Template ?
 
 * AWS TemplateFormationVersion
   * テンプレートのバージョン。2010-09-09固定。
@@ -56,13 +56,13 @@ Studying is fun for me. CloudFormation.
 ### Create Stack 
 
 ```
-aws cloudformation create-stack --stack-name practice-20201128 --template-body file://./01_practice/init.yaml
+aws cloudformation create-stack --stack-name [STACK_NAME] --template-body file://[YAML_FILE_PATH]
 ```
 
 ### Delete Stack
 
 ```
-aws cloudformation delete-stack --stack-name practice-20201128
+aws cloudformation delete-stack --stack-name [STACK_NAME]
 ```
 
 ## Recommended Plugin
