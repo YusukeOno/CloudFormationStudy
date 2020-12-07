@@ -39,7 +39,7 @@ Studying is fun for me. CloudFormation.
   * Hashtableのようなもの。キーに応じて値を特定できる。
     * キーとバリューのテーブル
     * たとえば、入力値やリージョンによって値が変わるようなものを決めるような使い方
-      * "Fn::FineInMap”で値を取得
+      * "Fn::FindInMap”で値を取得
 * Couditions
   * Parameters、他のCondition、Mappingから条件判断し結果に応じてリソースを作成可能
 * Resources
