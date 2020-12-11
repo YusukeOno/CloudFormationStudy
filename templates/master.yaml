@@ -363,35 +363,33 @@ Resources:
           systemctl start httpd
           systemctl enable httpd
           echo "Hello World from user data2" > /var/www/html/index.html
-
   # --------------------
   # Auto Scaling
   # --------------------
-  LaunchConfiguration:
-    Type: AWS::AutoScaling::LaunchConfiguration
-    Properties:
-      AssociatePublicIpAddress: true
-      ImageId: !Ref AmiId #amzn2-ami-hvm-2.0.20201126.0-x86_64-gp2
-      InstanceMonitoring: false
-      InstanceType: t3.micro
-      KeyName: 20200527-devepment
-      LaunchConfigurationName: LaunchConfigurationNamed20201203
-      SecurityGroups:
-        - !Ref SecurityGroupEC2
-
-  AutoScalingGroup:
-    Type: AWS::AutoScaling::AutoScalingGroup
-    Properties:
-      AutoScalingGroupName: AutoScalingGroup
-      DesiredCapacity: "2"
-      LaunchConfigurationName:
-        Ref: LaunchConfiguration
-      MaxSize: "2"
-      MinSize: "0"
-      Tags:
-        - Key: Name
-          PropagateAtLaunch: true
-          Value: instancename
-      VPCZoneIdentifier:
-        - !Ref SubnetPublic1
-        - !Ref SubnetPublic2
+  # LaunchConfiguration:
+  #   Type: AWS::AutoScaling::LaunchConfiguration
+  #   Properties:
+  #     AssociatePublicIpAddress: true
+  #     ImageId: !Ref AmiId #amzn2-ami-hvm-2.0.20201126.0-x86_64-gp2
+  #     InstanceMonitoring: false
+  #     InstanceType: t3.micro
+  #     KeyName: 20200527-devepment
+  #     LaunchConfigurationName: LaunchConfigurationNamed20201203
+  #     SecurityGroups:
+  #       - !Ref SecurityGroupEC2
+  # AutoScalingGroup:
+  #   Type: AWS::AutoScaling::AutoScalingGroup
+  #   Properties:
+  #     AutoScalingGroupName: AutoScalingGroup
+  #     DesiredCapacity: "2"
+  #     LaunchConfigurationName:
+  #       Ref: LaunchConfiguration
+  #     MaxSize: "2"
+  #     MinSize: "0"
+  #     Tags:
+  #       - Key: Name
+  #         PropagateAtLaunch: true
+  #         Value: instancename
+  #     VPCZoneIdentifier:
+  #       - !Ref SubnetPublic1
+  #       - !Ref SubnetPublic2
