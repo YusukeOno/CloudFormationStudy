@@ -313,7 +313,7 @@ Resources:
         Fn::Base64: |
           #!/bin/bash -xe
           yum update -y
-          yum install -y php
+          amazon-linux-extras install php7.3
           yum install -y httpd
           systemctl start httpd
           systemctl enable httpd
@@ -360,7 +360,7 @@ Resources:
         Fn::Base64: |
           #!/bin/bash -xe
           yum update -y
-          yum install -y php
+          amazon-linux-extras install php7.3
           yum install -y httpd
           systemctl start httpd
           systemctl enable httpd
