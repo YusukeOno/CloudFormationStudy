@@ -313,6 +313,10 @@ Resources:
         Fn::Base64: |
           #!/bin/bash -xe
           yum update -y
+          yum -y install ruby wget
+          wget https://aws-codedeploy-ap-northeast-1.s3.amazonaws.com/latest/install
+          chmod +x ./install
+          ./install auto
           amazon-linux-extras install php7.3
           yum install -y httpd
           systemctl start httpd
@@ -360,6 +364,10 @@ Resources:
         Fn::Base64: |
           #!/bin/bash -xe
           yum update -y
+          yum -y install ruby wget
+          wget https://aws-codedeploy-ap-northeast-1.s3.amazonaws.com/latest/install
+          chmod +x ./install
+          ./install auto
           amazon-linux-extras install php7.3
           yum install -y httpd
           systemctl start httpd
