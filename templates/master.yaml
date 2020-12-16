@@ -9,6 +9,49 @@ Parameters:
 # https://qiita.com/rammesh/items/22bab12455b18eda7e49#vpc%E4%BD%9C%E6%88%90public%E5%8F%8A%E3%81%B3private%E3%82%B5%E3%83%96%E3%83%8D%E3%83%83%E3%83%88
 Resources:
   # --------------------
+  # IAM Role for EC2 CodeDeploy
+  # --------------------
+  CodeDeployDemoIAMRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - "ec2.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Path: "/"
+  # --------------------
+  # IAM Policy for EC2 CodeDeploy
+  # --------------------
+  CodeDeployDemoIAMPolicy:
+    Type: "AWS::IAM::Policy"
+    Properties:
+      PolicyName: CodeDeploy-demo-IAMPolicy
+      Roles:
+        - Ref: CodeDeployDemoIAMRole
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: "Allow"
+            Resource: "*"
+            Action:
+              - "s3:GetObject"
+              - "s3:GetObjectVersion"
+              - "s3:ListBucket"
+  # --------------------
+  # IAM Instance Profile for EC2 CodeDeploy
+  # --------------------
+  CodeDeployDemoIAMInstanceProfile:
+    Type: "AWS::IAM::InstanceProfile"
+    Properties:
+      Path: "/"
+      Roles:
+        - Ref: CodeDeployDemoIAMRole
+
+  # --------------------
   # VIRTUAL PRIVATE CLOUD
   # --------------------
   VPC:
@@ -298,6 +341,7 @@ Resources:
                   ensureRunning: true
     Properties:
       ImageId: !Ref AmiId
+      IamInstanceProfile: !Ref CodeDeployDemoIAMInstanceProfile
       SecurityGroupIds:
         - !Ref SecurityGroupEC2
       SubnetId: !Ref SubnetPublic1
@@ -349,6 +393,7 @@ Resources:
                   ensureRunning: true
     Properties:
       ImageId: !Ref AmiId
+      IamInstanceProfile: !Ref CodeDeployDemoIAMInstanceProfile
       SecurityGroupIds:
         - !Ref SecurityGroupEC2
       SubnetId: !Ref SubnetPublic2

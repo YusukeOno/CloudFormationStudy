@@ -71,6 +71,11 @@ aws cloudformation create-stack --template-body file://[YAML_FILE_PATH] --stack-
 aws cloudformation create-stack --template-body file://[YAML_FILE_PATH] --parameters file://[JSON_FILE_PATH] --stack-name [STACK_NAME]
 ```
 
+### Create Stack (w/ Create IAM Resource)
+```
+aws cloudformation create-stack --template-body file://[YAML_FILE_PATH] --parameters file://[JSON_FILE_PATH] --stack-name [STACK_NAME] --capabilities CAPABILITY_NAMED_IAM
+```
+
 ### Delete Stack
 
 ```
