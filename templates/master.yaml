@@ -271,12 +271,12 @@ Resources:
   InternetELBTargetGroup:
     Type: "AWS::ElasticLoadBalancingV2::TargetGroup"
     Properties:
-      HealthCheckIntervalSeconds: 30
+      HealthCheckIntervalSeconds: 5
       HealthCheckPath: /
       HealthCheckPort: "80"
       HealthCheckProtocol: HTTP
-      HealthCheckTimeoutSeconds: 10
-      HealthyThresholdCount: 4
+      HealthCheckTimeoutSeconds: 2
+      HealthyThresholdCount: 2
       Matcher:
         HttpCode: "200"
       Name: MyTargerGroup
@@ -287,7 +287,7 @@ Resources:
           Port: 80
         - Id: !Ref EC2Instance2
           Port: 80
-      UnhealthyThresholdCount: 3
+      UnhealthyThresholdCount: 2
       VpcId: !Ref VPC
 
   InternetELBListnerHTTP:
