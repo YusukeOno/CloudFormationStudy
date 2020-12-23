@@ -105,18 +105,17 @@ cfn-lint [YAML_FILE_PATH]
 
 ## Reference Link
 
-DefaultVPCをawscliで作成する
-
+* DefaultVPCをawscliで作成する
 https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#create-default-vpc
 
-参考にさせていただいたリポジトリ構成
-
+* 参考にさせていただいたリポジトリ構成
 https://qiita.com/y-ohgi/items/89f07e866713185799f5
 
-[AWSマイスターシリーズ] AWS CloudFormation
-
+* [AWSマイスターシリーズ] AWS CloudFormation
 https://www.slideshare.net/AmazonWebServicesJapan/aws-aws-cloudformation
 
-AWS CloudFormationベストプラクティス
-
+* AWS CloudFormationベストプラクティス
 https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/best-practices.html
+
+* AWS CloudFormationのテンプレート
+https://aws.amazon.com/jp/cloudformation/resources/templates/
