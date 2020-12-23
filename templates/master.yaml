@@ -374,9 +374,16 @@ Resources:
           ./install auto
           amazon-linux-extras install php7.3
           yum install -y httpd
+          echo "<VirtualHost *:80>" > /etc/httpd/conf.d/my-host.conf
+          echo "DocumentRoot /var/www/local.myhost/public" >> /etc/httpd/conf.d/my-host.conf
+          echo "<Directory \"/var/www/local.myhost/public\">"  >> /etc/httpd/conf.d/my-host.conf
+          echo "Options Indexes FollowSymLinks"  >> /etc/httpd/conf.d/my-host.conf
+          echo "AllowOverride All"    >> /etc/httpd/conf.d/my-host.conf
+          echo "Require all granted" >> /etc/httpd/conf.d/my-host.conf
+          echo "</Directory>"    >> /etc/httpd/conf.d/my-host.conf
+          echo "</VirtualHost>" >> /etc/httpd/conf.d/my-host.conf
           systemctl start httpd
           systemctl enable httpd
-          echo "Hello World from user data1" > /var/www/html/index.html
 
   EC2Instance2:
     Type: "AWS::EC2::Instance"
@@ -426,9 +433,16 @@ Resources:
           ./install auto
           amazon-linux-extras install php7.3
           yum install -y httpd
+          echo "<VirtualHost *:80>" > /etc/httpd/conf.d/my-host.conf
+          echo "DocumentRoot /var/www/local.myhost/public" >> /etc/httpd/conf.d/my-host.conf
+          echo "<Directory \"/var/www/local.myhost/public\">"  >> /etc/httpd/conf.d/my-host.conf
+          echo "Options Indexes FollowSymLinks"  >> /etc/httpd/conf.d/my-host.conf
+          echo "AllowOverride All"    >> /etc/httpd/conf.d/my-host.conf
+          echo "Require all granted" >> /etc/httpd/conf.d/my-host.conf
+          echo "</Directory>"    >> /etc/httpd/conf.d/my-host.conf
+          echo "</VirtualHost>" >> /etc/httpd/conf.d/my-host.conf
           systemctl start httpd
           systemctl enable httpd
-          echo "Hello World from user data2" > /var/www/html/index.html
   # --------------------
   # Auto Scaling
   # --------------------
