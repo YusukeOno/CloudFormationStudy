@@ -373,6 +373,7 @@ Resources:
           chmod +x ./install
           ./install auto
           amazon-linux-extras install php7.3
+          yum -y install php-mbstring php-gd php-pdo php-mysqlnd php-pear php-devel
           export HOME=/root
           curl  -sS https://getcomposer.org/installer | php
           mv composer.phar /usr/local/bin/composer
@@ -435,6 +436,7 @@ Resources:
           chmod +x ./install
           ./install auto
           amazon-linux-extras install php7.3
+          yum -y install php-mbstring php-gd php-pdo php-mysqlnd php-pear php-devel
           export HOME=/root
           curl  -sS https://getcomposer.org/installer | php
           mv composer.phar /usr/local/bin/composer
