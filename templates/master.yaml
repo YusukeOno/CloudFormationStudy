@@ -234,6 +234,7 @@ Resources:
     Type: "AWS::EC2::SecurityGroup"
     Properties:
       VpcId: !Ref VPC
+      GroupName: SecurityGroupELB
       GroupDescription: Enable HTTP/HTTPS access via port 80,443
       SecurityGroupIngress:
         - IpProtocol: tcp
@@ -252,6 +253,7 @@ Resources:
     Type: "AWS::EC2::SecurityGroup"
     Properties:
       VpcId: !Ref VPC
+      GroupName: SecurityGroupEC2
       GroupDescription: Enable SSH access via port 22
       SecurityGroupIngress:
         - IpProtocol: tcp
@@ -372,6 +374,7 @@ Resources:
           wget https://aws-codedeploy-ap-northeast-1.s3.amazonaws.com/latest/install
           chmod +x ./install
           ./install auto
+          service codedeploy-agent start
           amazon-linux-extras install php7.3
           yum -y install php-mbstring php-gd php-pdo php-mysqlnd php-pear php-devel
           export HOME=/root
@@ -435,6 +438,7 @@ Resources:
           wget https://aws-codedeploy-ap-northeast-1.s3.amazonaws.com/latest/install
           chmod +x ./install
           ./install auto
+          service codedeploy-agent start
           amazon-linux-extras install php7.3
           yum -y install php-mbstring php-gd php-pdo php-mysqlnd php-pear php-devel
           export HOME=/root
