@@ -1,0 +1,5 @@
+---
+# tasks file for apache24
+- name: Hello World!
+  debug:
+    msg: "Hello World! apache24"
