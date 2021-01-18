@@ -3,3 +3,38 @@
 - name: Hello World!
   debug:
     msg: "Hello World! initial"
+
+- name: Upgrade all packages
+  yum:
+    name: "*"
+    state: latest
+  become: yes
+
+- name: codedeploy-agent depended module install
+  yum:
+    name: "{{ modules }}"
+  vars:
+    modules:
+      - ruby
+      - wget
+  become: yes
+
+- name: codedeploy-agent installer download
+  get_url:
+    url: https://aws-codedeploy-ap-northeast-1.s3.amazonaws.com/latest/install
+    dest: /tmp
+
+- name: codedeploy-agent add executor
+  file: path=/tmp/install mode=0755
+  become: yes
+
+- name: codedeploy-agent install
+  shell: "/tmp/install auto"
+  become: yes
+
+- name: codedeploy-agent service start
+  service:
+    name: codedeploy-agent
+    state: started
+    enabled: true
+  become: yes

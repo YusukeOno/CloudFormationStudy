@@ -3,3 +3,16 @@
 - name: Hello World!
   debug:
     msg: "Hello World! apache24"
+
+- name: apache 2.4 install
+  yum:
+    name: httpd
+    state: latest
+  become: yes
+
+- name: service start
+  service:
+    name: httpd
+    state: started
+    enabled: true
+  become: yes

@@ -3,3 +3,30 @@
 - name: Hello World!
   debug:
     msg: "Hello World! php73"
+
+- name: php 7.3 install
+  shell: "amazon-linux-extras enable php7.3"
+  become: yes
+
+- name: php modules install
+  yum:
+    name: "{{ modules }}"
+  vars:
+    modules:
+      - php-mbstring
+      - php-gd
+      - php-pdo
+      - php-mysqlnd
+      - php-pear
+      - php-devel
+  become: yes
+
+- name: composer install
+  debug:
+    msg: "Here is composer install"
+
+- name: service resstart
+  service:
+    name: httpd
+    state: restarted
+  become: yes

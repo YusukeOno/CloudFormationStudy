@@ -343,32 +343,6 @@ Resources:
           Value: demo
         - Key: InstanceName
           Value: amzn2-ami-hvm-2.0.20201126.0-x86_64-gp2
-      # https://qiita.com/blackpeach7/items/6cc67e19add848811a2d
-      UserData:
-        Fn::Base64: |
-          #!/bin/bash -xe
-          yum update -y
-          yum -y install ruby wget
-          wget https://aws-codedeploy-ap-northeast-1.s3.amazonaws.com/latest/install
-          chmod +x ./install
-          ./install auto
-          service codedeploy-agent start
-          amazon-linux-extras install php7.3
-          yum -y install php-mbstring php-gd php-pdo php-mysqlnd php-pear php-devel
-          export HOME=/root
-          curl  -sS https://getcomposer.org/installer | php
-          mv composer.phar /usr/local/bin/composer
-          yum install -y httpd
-          echo "<VirtualHost *:80>" > /etc/httpd/conf.d/my-host.conf
-          echo "DocumentRoot /var/www/local.myhost/public" >> /etc/httpd/conf.d/my-host.conf
-          echo "<Directory \"/var/www/local.myhost/public\">"  >> /etc/httpd/conf.d/my-host.conf
-          echo "Options Indexes FollowSymLinks"  >> /etc/httpd/conf.d/my-host.conf
-          echo "AllowOverride All"    >> /etc/httpd/conf.d/my-host.conf
-          echo "Require all granted" >> /etc/httpd/conf.d/my-host.conf
-          echo "</Directory>"    >> /etc/httpd/conf.d/my-host.conf
-          echo "</VirtualHost>" >> /etc/httpd/conf.d/my-host.conf
-          systemctl start httpd
-          systemctl enable httpd
 
   EC2Instance2:
     Type: "AWS::EC2::Instance"
@@ -385,32 +359,6 @@ Resources:
           Value: demo
         - Key: InstanceName
           Value: amzn2-ami-hvm-2.0.20201126.0-x86_64-gp2
-      # https://qiita.com/blackpeach7/items/6cc67e19add848811a2d
-      UserData:
-        Fn::Base64: |
-          #!/bin/bash -xe
-          yum update -y
-          yum -y install ruby wget
-          wget https://aws-codedeploy-ap-northeast-1.s3.amazonaws.com/latest/install
-          chmod +x ./install
-          ./install auto
-          service codedeploy-agent start
-          amazon-linux-extras install php7.3
-          yum -y install php-mbstring php-gd php-pdo php-mysqlnd php-pear php-devel
-          export HOME=/root
-          curl  -sS https://getcomposer.org/installer | php
-          mv composer.phar /usr/local/bin/composer
-          yum install -y httpd
-          echo "<VirtualHost *:80>" > /etc/httpd/conf.d/my-host.conf
-          echo "DocumentRoot /var/www/local.myhost/public" >> /etc/httpd/conf.d/my-host.conf
-          echo "<Directory \"/var/www/local.myhost/public\">"  >> /etc/httpd/conf.d/my-host.conf
-          echo "Options Indexes FollowSymLinks"  >> /etc/httpd/conf.d/my-host.conf
-          echo "AllowOverride All"    >> /etc/httpd/conf.d/my-host.conf
-          echo "Require all granted" >> /etc/httpd/conf.d/my-host.conf
-          echo "</Directory>"    >> /etc/httpd/conf.d/my-host.conf
-          echo "</VirtualHost>" >> /etc/httpd/conf.d/my-host.conf
-          systemctl start httpd
-          systemctl enable httpd
   # --------------------
   # Auto Scaling
   # --------------------
