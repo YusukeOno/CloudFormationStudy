@@ -4,6 +4,7 @@
   remote_user: ec2-user
   roles:
     - role: initial
+    - role: codedeploy-agent
     - role: apache24
     - role: php73
   vars:
