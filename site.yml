@@ -8,5 +8,5 @@
     - role: goss
     - role: apache24
     - role: php73
-  vars:
-    ansible_ssh_private_key_file: "/Users/yusuke.ono/Develop/Aws/credentials/20200527-devepment.pem"
+  # vars:
+  #   ansible_ssh_private_key_file: "/Users/yusuke.ono/Develop/Aws/credentials/20200527-devepment.pem"
