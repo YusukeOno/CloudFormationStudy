@@ -25,7 +25,7 @@
   debug:
     msg: "Here is composer install"
 
-- name: service resstart
+- name: service restart
   service:
     name: httpd
     state: restarted
