@@ -5,6 +5,7 @@
   roles:
     - role: initial
     - role: codedeploy-agent
+    - role: goss
     - role: apache24
     - role: php73
   vars:

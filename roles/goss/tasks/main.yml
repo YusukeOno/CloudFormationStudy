@@ -1,0 +1,17 @@
+---
+# tasks file for goss
+- name: Hello World!
+  debug:
+    msg: "Hello World! goss"
+
+# https://github.com/aelsabbahy/goss#latest
+- name: goss binary download
+  get_url:
+    url: https://github.com/aelsabbahy/goss/releases/latest/download/goss-linux-amd64
+    dest: /usr/local/bin/goss
+    force: yes
+  become: yes
+
+- name: goss add executor
+  file: path=/usr/local/bin/goss mode=0755
+  become: yes
