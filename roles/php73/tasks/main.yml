@@ -4,11 +4,11 @@
   debug:
     msg: "Hello World! php73"
 
-- name: php 7.3 install
-  shell: "amazon-linux-extras enable php7.3"
+- name: php 7.3 enable
+  command: "amazon-linux-extras enable php7.3"
   become: yes
 
-- name: php modules install
+- name: php modules install from amazon-linux-extras
   yum:
     name: "{{ modules }}"
   vars:

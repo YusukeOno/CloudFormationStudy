@@ -23,7 +23,7 @@
   become: yes
 
 - name: codedeploy-agent install
-  shell: "/tmp/install auto"
+  command: "/tmp/install auto"
   become: yes
 
 - name: codedeploy-agent service start
