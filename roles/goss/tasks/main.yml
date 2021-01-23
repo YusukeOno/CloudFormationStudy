@@ -15,3 +15,24 @@
 - name: goss add executor
   file: path=/usr/local/bin/goss mode=0755
   become: yes
+
+# minimum test
+- name: goss prepare test sshd
+  command: "goss autoadd sshd"
+  changed_when: False
+
+- name: goss prepare test httpd
+  command: "goss autoadd httpd"
+  changed_when: False
+
+- name: goss prepare test 80
+  command: "goss add addr localhost:80"
+  changed_when: False
+
+- name: goss test exec
+  command: "goss validate"
+  register: goss_results
+
+- name: goss test results
+  debug:
+    msg: "{{ goss_results }}"
