@@ -7,5 +7,5 @@
 - name: Upgrade all packages
   yum:
     name: "*"
-    state: latest
+    state: present
   become: yes
