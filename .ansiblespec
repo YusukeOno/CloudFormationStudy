@@ -1,4 +1,4 @@
 ---
 -
   playbook: site.yml
-  inventory: hosts
+  inventory: aws_ec2.yml
