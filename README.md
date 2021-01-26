@@ -99,6 +99,12 @@ aws cloudformation delete-stack --stack-name [STACK_NAME]
 cfn-lint [YAML_FILE_PATH]
 ```
 
+### Ansible
+
+```
+ansible-playbook -i aws_ec2.yml site.yml
+```
+
 ## Overview
 
 ![TODO](https://github.com/YusukeOno/CloudFormationStudy/wiki/img/overview.png "Overview")
