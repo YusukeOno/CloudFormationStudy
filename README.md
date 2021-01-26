@@ -105,19 +105,6 @@ cfn-lint [YAML_FILE_PATH]
 ansible-playbook -i aws_ec2.yml site.yml
 ```
 
-### ansible_spec install
-
-```
-sudo gem install serverspec 
-sudo gem install ansible_spec
-```
-
-### ansible_spec setup
-
-```
-ansiblespec-init
-```
-
 ## Overview
 
 ![TODO](https://github.com/YusukeOno/CloudFormationStudy/wiki/img/overview.png "Overview")
