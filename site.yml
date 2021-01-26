@@ -1,5 +1,5 @@
 ---
-- name: apache 2.4 settings
+- name: apache 2.4 / php 7.3 settings
   hosts: all
   remote_user: ec2-user
   roles:
