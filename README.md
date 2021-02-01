@@ -105,6 +105,18 @@ cfn-lint [YAML_FILE_PATH]
 ansible-playbook -i aws_ec2.yml site.yml
 ```
 
+### Describe instance
+
+```
+aws ec2 describe-instances
+```
+
+### Create AMI
+
+```
+aws ec2 create-image --instance-id i-XXXXXX --no-reboot --name ami-demo_`date "+%Y%m%d-%H%M%S"` [--dry-run]
+```
+
 ## Overview
 
 ![TODO](https://github.com/YusukeOno/CloudFormationStudy/wiki/img/overview.png "Overview")
