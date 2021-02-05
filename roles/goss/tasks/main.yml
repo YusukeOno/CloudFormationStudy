@@ -1,9 +1,5 @@
 ---
 # tasks file for goss
-- name: Hello World!
-  debug:
-    msg: "Hello World! goss"
-
 # https://github.com/aelsabbahy/goss#latest
 - name: goss binary download
   get_url:

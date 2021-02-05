@@ -1,9 +1,5 @@
 ---
 # tasks file for initial
-- name: Hello World!
-  debug:
-    msg: "Hello World! initial"
-
 - name: Upgrade all packages
   yum:
     name: "*"

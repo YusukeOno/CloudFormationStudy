@@ -1,9 +1,5 @@
 ---
 # tasks file for apache24
-- name: Hello World!
-  debug:
-    msg: "Hello World! apache24"
-
 - name: apache 2.4 install
   yum:
     name: httpd
