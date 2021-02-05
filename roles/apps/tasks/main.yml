@@ -1,0 +1,50 @@
+---
+# tasks file for apps
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: /var/www/local.myhost
+    state: absent
+    mode: "0755"
+  become: yes
+
+- name: Apps directory
+  file: path=/var/www/local.myhost state=directory owner=ec2-user group=ec2-user mode=0755
+  become: yes
+
+- name: Clone the code repository to the docroot.
+  git:
+    repo: "{{ repo }}"
+    dest: /var/www/local.myhost
+    accept_hostkey: yes
+    key_file: /home/ec2-user/.ssh/id_ed25519-github-deploy-key
+    version: main
+  become_user: ec2-user
+
+- name: check Apps directiry
+  stat:
+    path: /var/www/local.myhost
+  register: chk_file
+
+- name: Laravel Install
+  community.general.composer:
+    command: install
+    working_dir: /var/www/local.myhost/src
+
+- name: Copy .env file with owner and permissions
+  synchronize:
+    src: /var/www/local.myhost/src/.env.example
+    dest: /var/www/local.myhost/src/.env
+  delegate_to: "{{ inventory_hostname }}"
+
+- name: Laravel atrisan key:generate
+  shell: "cd /var/www/local.myhost/src; php artisan key:generate"
+
+- name: Laravel Storage Recursively change ownership of a directory
+  file:
+    path: /var/www/local.myhost/src/storage
+    state: directory
+    recurse: yes
+    owner: ec2-user
+    group: ec2-user
+    mode: "0777"
+  become: yes
