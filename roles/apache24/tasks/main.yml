@@ -10,6 +10,15 @@
     state: present
   become: yes
 
+- name: apache 2.4 conf deploy
+  copy:
+    src: files/local.myhost.conf
+    dest: /etc/httpd/conf.d
+    owner: root
+    group: root
+    mode: "u=rw,g=r,o=r"
+  become: yes
+
 - name: service start
   service:
     name: httpd

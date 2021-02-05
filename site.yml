@@ -8,3 +8,5 @@
     - role: apache24
     - role: php73
     - role: goss
+    - role: git
+    - role: apps
