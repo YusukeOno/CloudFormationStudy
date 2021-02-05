@@ -13,6 +13,7 @@
     name: "{{ modules }}"
   vars:
     modules:
+      - php
       - php-mbstring
       - php-gd
       - php-pdo
